@@ -10,6 +10,8 @@ auth = tweepy.OAuthHandler(API_KEY,API_SECRET_KEY)
 auth.set_access_token(ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
+substring = '#helloworld'
+
 #read the file containing the latest tweet id
 with open("id_file.text") as f:
 	last_seen_id = f.readline().rstrip()
@@ -18,7 +20,8 @@ with open("id_file.text") as f:
 mentions = api.mentions_timeline(last_seen_id)
 
 for mention in mentions:
-	print(str(mention.id) + '-----' + mention.text.lower())
+	if substring in mention.text.lower():
+		api.update_status('Hello to you too!', mention.id)
 
 #store the new latest id in the file 
 try: 
