@@ -19,16 +19,22 @@ with open("id_file.text") as f:
 #returns the 20 most recent mentions, including retweets. (basically anytime someone @'s you)
 mentions = api.mentions_timeline(last_seen_id)
 
-for mention in mentions:
-	if substring in mention.text.lower():
-		api.update_status('Hello to you too!', mention.id)
-
-#store the new latest id in the file 
+#check if there are any new tweets and reply if conditions are met
 try: 
 	last_seen_id = mentions[0].id 
+	if last_seen_id:
+		counter = 0
+		for mention in mentions:
+			if substring in mention.text.lower():
+				api.update_status('Hello to you too!', mention.id, True)
+				counter+=1
+		print("Replied to " + str(counter) + " tweets")		
 except:
-	print("No new tweets with your mention")
+	print("No new tweets contain the specified hashtag")
+
 with open("id_file.text", "w") as f:
 	f.write(str(last_seen_id))
+
+
 
 	
