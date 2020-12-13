@@ -1,4 +1,4 @@
-import tweepy
+import tweepy, random
 
 ACCESS_TOKEN = 'enter_acces_token_here'
 ACCESS_TOKEN_SECRET = 'enter_acces_token_secret_key_here'
@@ -10,7 +10,13 @@ auth = tweepy.OAuthHandler(API_KEY,API_SECRET_KEY)
 auth.set_access_token(ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
-substring = '#helloworld'
+substring = '#raiseawareness'
+
+#create list of articles 
+articles = []
+file = open("articles.text")
+for line in file:
+	articles.append(line.rstrip())
 
 #read the file containing the latest tweet id
 with open("id_file.text") as f:
@@ -26,7 +32,8 @@ try:
 		counter = 0
 		for mention in mentions:
 			if substring in mention.text.lower():
-				api.update_status('Hello to you too!', mention.id, True)
+				article = random.choice(articles)
+				api.update_status("Here's todays article. \n" + article, mention.id, True)
 				counter+=1
 		print("Replied to " + str(counter) + " tweets")		
 except:
