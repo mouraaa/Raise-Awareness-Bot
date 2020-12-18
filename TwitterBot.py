@@ -8,7 +8,7 @@ API_SECRET_KEY = 'enter_api_secret_key_here'
 #setting up the api
 auth = tweepy.OAuthHandler(API_KEY,API_SECRET_KEY)
 auth.set_access_token(ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
-api = tweepy.API(auth)
+api = tweepy.API(auth, wait_on_rate_limit=True)
 
 substring = '#raiseawareness'
 
