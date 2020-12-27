@@ -1,5 +1,3 @@
-Uses Twitter's API to automatically send replies when someone tweets at you using a specific hashtag.
-
 # The Goal 
 If i'm going to use one of the biggest platforms on the planet, might as well go above and beyond. The aim of this project is to raise awareness with critical issues that we as humanity are currently facing. The first step in fixing a problem is to acknowledge that there is one, and this is where the project steps in.
 
@@ -14,7 +12,18 @@ I set up an account by the name of @MouraasBot. Simply tweet at me using the #Ra
 
 ` pip install tweepy `
 
+## Secret Keys
+To use this script, you will need four different keys, all provided by twitter when you register your account as a developer. If you refresh those keys, you will have to update your code's keys accordingly.  
+
+## ID File
+Please follow these steps closely as it is how you will retrieve the latest tweet id to enter in your id file. 
+
+- Open up your terminal and type 'python3'. 
+- Copy and paste lines 1 - 11 and press enter. 
+- Copy the following code into the terminal: 'mentions = api.mentions_timeline()' and hit enter
+- Copy the following code into the terminal: 'mentions[0].id' and hit enter. You will receive the most recent tweet's id. 
+- Copy and paste that number in the id_file.
+
 ## Notice
 
-If you want to automatically run the script, you will have to place a portion of the code in a while true loop and upload all the files on a python cloud service such as python anywhere. 
-
+If you want to automatically run the script, even while your computer/terminal is closed, you will have to place all the files on a python cloud service such as pythonanywhere, or even on your own server.
