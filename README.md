@@ -10,7 +10,9 @@ I set up an account by the name of @MouraasBot. Simply tweet at me using the #Ra
 
 ## Prerequisites
 
-` pip install tweepy `
+` pip install tweepy ` 
+
+` twitter developer account `
 
 ## Secret Keys
 To use this script, you will need four different keys, all provided by twitter when you register your account as a developer. If you refresh those keys, you will have to update your code's keys accordingly.  
@@ -18,11 +20,15 @@ To use this script, you will need four different keys, all provided by twitter w
 ## ID File
 Please follow these steps closely as it is how you will retrieve the latest tweet id to enter in your id file. 
 
-- Open up your terminal and type 'python3'. 
+- Open up your terminal, type 'python3' and hit enter.
 - Copy and paste lines 1 - 11 and press enter. 
 - Copy the following code into the terminal: 'mentions = api.mentions_timeline()' and hit enter
 - Copy the following code into the terminal: 'mentions[0].id' and hit enter. You will receive the most recent tweet's id. 
 - Copy and paste that number in the id_file.
+
+It should look like this:
+
+![](terminal.png)
 
 ## Notice
 
