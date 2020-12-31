@@ -18,28 +18,40 @@ file = open("articles.text")
 for line in file:
 	articles.append(line.rstrip())
 
-while True: 
-	#read the file containing the latest tweet id
-	with open("id_file.text") as f:
-		last_seen_id = f.readline().rstrip()
+#retrieve the first tweet's id to pass into the while loop's mention_timeline 
+first_tweet = api.mentions_timeline(count='1')
+last_seen_id = first_tweet[0].id
+check = False 
 
-	try: #check if there are any new tweets and reply if conditions are met
-		#returns the 20 most recent mentions, including retweets. (basically anytime someone @'s you)
+while True: 
+	if check:
+		#read the file containing the latest tweet id
+		with open("id_file.text") as f:
+			last_seen_id = f.readline().rstrip()
+	  
+	try: 
 		mentions = api.mentions_timeline(last_seen_id)
-		
-		last_seen_id = mentions[0].id 
-		if last_seen_id:
+
+		#update last_seen_id and check if it exists
+		last_seen_id = mentions[0].id #mentions[0] is the last tweet retrieved in mentions_timeline(last_seen_id)
+		if last_seen_id: #if this exists, then somebody tweeted in the 15 seconds, if not, nobody tweeted so no need to check
 			counter = 0
 			for mention in mentions:
 				if substring in mention.text.lower():
 					article = random.choice(articles)
 					api.update_status("Here's todays article. \n" + article, mention.id, True)
 					counter+=1
-			print("Replied to " + str(counter) + " tweets")		
+			print("Replied to " + str(counter) + " tweet(s)")		
 	except:
 		print("No new tweets contain the specified hashtag")
 
 	with open("id_file.text", "w") as f:
 		f.write(str(last_seen_id))
 
+	check = True
 	time.sleep(15)
+
+
+
+
+	
